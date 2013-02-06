@@ -471,14 +471,20 @@ class MeetingCommands(object):
             self.reply("Already voting on '%s'" % self._voteTopic)
             return
         elif voteDetails is None:
-            self.reply("Unable to parse vote topic and options.")
+            self.reply("Unable to parse vote topic and options, make sure the topic ends with a question mark.")
             return
-        self._voteTopic = voteDetails.group("question")
         voteOptions = voteDetails.group("choices")
         if voteOptions == "":
-            self._voteOptions = self.config.defaultVoteOptions
+            voteOptions = self.config.defaultVoteOptions
         else:
-            self._voteOptions = self.config.choicesSplit_RE.split(voteOptions)
+	    # will dedup options by converting to a set, but converts back to
+	    # a list since we use indexing later on
+            voteOptions = list(set(map(unicode.lower, self.config.choicesSplit_RE.split(voteOptions))))
+	    if len(voteOptions) == 1:
+	        self.reply("To start a vote with options set at least two unique options.")
+		return
+        self._voteOptions = voteOptions
+        self._voteTopic = voteDetails.group("question")
         self.reply("Begin voting on: %s? Valid vote options are %s." % \
             (self._voteTopic, ", ".join(self._voteOptions)))
         self.reply("Vote using '#vote OPTION'. Only your last vote counts.")
