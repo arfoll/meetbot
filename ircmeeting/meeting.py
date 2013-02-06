@@ -91,7 +91,7 @@ class Config(object):
     startMeetingMessage = ("Meeting started %(starttime)s %(timeZone)s.  "
               "The chair is %(chair)s. Information about MeetBot at "
               "%(MeetBotInfoURL)s.\n"
-              "Useful Commands: #action #agreed #help #info #idea #link "
+              "Useful Commands: #action #agreed #info #idea #link "
               "#topic #startvote.")
     endMeetingMessage = ("Meeting ended %(endtime)s %(timeZone)s.  "
                          "Information about MeetBot at %(MeetBotInfoURL)s . "
