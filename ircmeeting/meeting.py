@@ -72,7 +72,7 @@ class Config(object):
     # Regular expression for parsing the startvote options.
     choicesSplit_RE = re.compile(r'[^\w+-]+')
     # default voting options if none are given by the user
-    defaultVoteOptions = ['Yes', 'No']
+    defaultVoteOptions = [unicode('Yes'), unicode('No')]
     # The channels which won't have date/time appended to the filename.
     specialChannels = ("#meetbot-test", "#meetbot-test2")
     specialChannelFilenamePattern = '%(channel)s/%(channel)s'
