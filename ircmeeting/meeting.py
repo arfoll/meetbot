@@ -471,7 +471,7 @@ class MeetingCommands(object):
             self.reply("Already voting on '%s'" % self._voteTopic)
             return
         elif voteDetails is None:
-            self.reply("Unable to parse vote topic and options, make sure the topic ends with a question mark.")
+            self.reply("Unable to parse vote topic and options. Format #startvote <question>? <option1> <option2> ... <optionN> . Note if options are not specified yes/no is assumed.")
             return
         voteOptions = voteDetails.group("choices")
         if voteOptions == "":
